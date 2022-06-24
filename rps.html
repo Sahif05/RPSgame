@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>RPS</title>
 </head>
 <body>
-    <h1>RPS game</h1>
+    <h1>Rock Paper Scissors game</h1>
+    <hr>
     <h2>Win five rounds to be the winnner</h2>
-    <ul>
         <li>R=rock</li>
         <li>P=paper</li>
         <li>S=scissor</li>
-    </ul>
 
     <div>
         <p id="directions-text">Press r, p or s to start playing!</p>
@@ -42,16 +42,24 @@
             var userGuess = event.key;
             var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
             if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
-                directionsText.textContent = "";
-                userChoiceText.textContent = "You chose: " + userGuess;
-                computerChoiceText.textContent = "The computer chose: " + computerGuess;
-                winsText.textContent = "wins: " + wins;
-                lossesText.textContent = "losses: " + losses;   
+                if ((userGuess === "r" && computerGuess === "s") ||
+          (userGuess === "s" && computerGuess === "p") || 
+          (userGuess === "p" && computerGuess === "r")) {
+          wins++;
+        } else if (userGuess === computerGuess) {
+          ties++;
+        } else {
+          losses++;
+        }
+            userChoiceText.textContent = "You chose: " + userGuess;
+            computerChoiceText.textContent = "The bot chose : " + computerGuess;
+            winsText.textContent = "wins: " + wins;
+            lossesText.textContent = "losses: " + losses;
+
+            if(wins>=5){
+                alert("!YOU WON!")
+            }
       }
-    if (userGuess === computerGuess) {
-    alert("is a Tie");
-    return;
-    }
 
 };
 </script>
